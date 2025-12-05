@@ -53,7 +53,7 @@ not “C” “A” “C” “G” “C”
 paste(v, collapse = "")
 ```
 
-    [1] "TTAGCTACTGATTAGAGGCCCCGCTAGTGGGATTGTTATGATCCATTACT"
+    [1] "TGGTGAGATGTAGTATAGTGTCTTGGTAAGAGAGTGAACTACTTCGGCTT"
 
 Turn this into my first wee function
 
@@ -71,7 +71,7 @@ Test it:
 generate_dna(60)
 ```
 
-    [1] "AATTATGGGGTTTCGCTCGATTAGAATGGTTGCGGGACAACAATATTGTGGCCCCCAAGC"
+    [1] "TGCCGAATCCCGTCTGGTGGCGTTATAAAATGGATTACGTTGCTATATTTTGCGCCATAT"
 
 ``` r
 fasta <- F
@@ -122,7 +122,7 @@ generate_protein <- function(size = 50, fasta = T) {
 generate_protein(6)
 ```
 
-    [1] "FCYDER"
+    [1] "LRFCSR"
 
 Use our new `generate_protein()` function to make random protein
 sequences of length 6 to 12 (i.e. one length 6, one length 7, etc. up to
@@ -132,43 +132,43 @@ length 12)
 generate_protein(6)
 ```
 
-    [1] "DFVDNR"
+    [1] "RTGKIC"
 
 ``` r
 generate_protein(7)
 ```
 
-    [1] "EWWTTKY"
+    [1] "GMEICTF"
 
 ``` r
 generate_protein(8)
 ```
 
-    [1] "NEGSEPVH"
+    [1] "FISYSLWW"
 
 ``` r
 generate_protein(9)
 ```
 
-    [1] "QQCGDLHHN"
+    [1] "MNCQQTIGE"
 
 ``` r
 generate_protein(10)
 ```
 
-    [1] "QNNMDSGVMI"
+    [1] "WYFRRLDAFQ"
 
 ``` r
 generate_protein(11)
 ```
 
-    [1] "IGGMDLNMRQA"
+    [1] "GPTRSKSNKCC"
 
 ``` r
 generate_protein(12)
 ```
 
-    [1] "MFRGTFIAMDGR"
+    [1] "GPQKLDSLLFVH"
 
 A second way is to use a `for()` loop:
 
@@ -189,19 +189,19 @@ for (i in lengths) {
 ```
 
     >6
-    FQPINR
+    RGLDCD
     >7
-    NTHEYNV
+    KKECVYC
     >8
-    GGERKECS
+    LMWGVWDM
     >9
-    HYKMSQPEP
+    HKEKCTKVV
     >10
-    MSMPRFWKEW
+    TYEAKSIVIL
     >11
-    TQKMNAYDPTL
+    NTKQWSVPHGH
     >12
-    EHERSRNWRRRK
+    SDHKEMGPDSLI
 
 A third, and better way to solve this is to use the `apply()` family of
 functions, specifically the `sapply()` function in this case.
@@ -210,5 +210,5 @@ functions, specifically the `sapply()` function in this case.
 sapply(6:12, generate_protein)
 ```
 
-    [1] "GWQCWS"       "SKRPRLN"      "QKDSWSLM"     "GKQKKEDQI"    "YNNDVFCNGI"  
-    [6] "CVLLIIDAFVL"  "MVFHIKMMHSTI"
+    [1] "WHSDFA"       "QMERQSN"      "FKRRPNLV"     "AGSPQLSNW"    "YILCGMNLTA"  
+    [6] "CFNATVECISS"  "NYNDPVEWNISD"
