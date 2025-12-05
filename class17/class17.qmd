@@ -1,0 +1,65 @@
+---
+title: "Class 17: Genome informatics"
+author: "Ami Pant (A15991358)"
+format: pdf
+---
+
+## Identifying Genetic Variants of Interest
+
+> Q1: What are those 4 candidate SNPs?
+
+The four candidate SNPs are rs12936231, rs8067378, rs9303277, and rs3816470. 
+
+> Q2: What three genes do these variants overlap or effect?
+
+The rs12936231 variant overlaps with ZPBP2, rs9303277 overlaps with IKZF3, and rs3816470 also overlaps with IKZF3. The rs8067378 variant does not overlap with a specific gene, but it falls between the ZPBP2 and GSDMB genes.
+
+> Q3: What is the location of rs8067378 and what are the different alleles for rs8067378? 
+
+rs8067378 is located on chromosome 17 at position 39895095 and its different alleles are A, C, and G. 
+
+> Q4: Name at least 3 downstream genes for rs8067378?
+
+GSDMB, ORMDL3, and LRRC3C are genes downstream of rs8067378.
+
+> Q5: What proportion of the Mexican Ancestry in Los Angeles sample population (MXL) are 
+homozygous for the asthma associated SNP (G|G)? 
+
+0.1384615 of the Mexican Ancestry in Los Angeles sampe population are homozygous for the asthma associated SNP (G|G).
+
+> Q6. Back on the ENSEMBLE page, use the “search for a sample” field above to find the 
+particular sample HG00109. This is a male from the GBR population group. What is the 
+genotype for this sample?
+
+This sample is homozygous for the asthma associated SNP (G|G).
+
+## Initial RNA-Seq Analysis 
+
+> Q7: How many sequences are there in the first file? What is the file size and format of the data? Make sure the format is fastqsanger here!
+
+There are 3863 sequences in the first file. This is a fastqsanger file of size 741.9 KB
+
+> Q8: What is the GC content and sequence length of the second fastq file?
+
+The GC content is 54% and the sequence length is 50-75 in the second fastq file.
+
+> Q9: How about per base sequence quality? Does any base have a mean quality score below 
+20? 
+
+None of the bases have a mean quality score below 20. None of the median scores are below the blue line, so the data set does not need to be trimmed.
+
+## Mapping RNA-Seq reads to genome
+
+> Q10: Where are most the accepted hits located?
+
+The most accepted hits map to GSDMP, ORMDL3, ZPBP2, and PSMD3. 
+
+> Q11: Following Q10, is there any interesting gene around that area?
+
+In this area, ZPBP2, GSDMB, GSDMA, and ORMDL3 genes show up which are genes at which some SNPs overlap with or are near. 
+
+> Q12: Cufflinks again produces multiple output files that you can inspect from your right-hand side galaxy history. From the “gene expression” output, what is the FPKM for the ORMDL3 gene? What are the other genes with above zero FPKM values?
+
+The FPKM for ORMDL3 is 136853. The other genes with FPKM values above zero are ZPBP2, GSDMA, GSDMB, and PSMD3.
+
+
