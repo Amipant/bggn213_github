@@ -1,0 +1,265 @@
+---
+title: "Class07: Machine Learning 1"
+author: "Ami Pant (A15991358)"
+format: pdf
+---
+
+Today we will begin our exploration of some "classical" machine learning approaches. We will start with clustering: 
+
+Let's first make up some data cluster where we know what the answer should be.
+
+```{r}
+hist(rnorm(1000))
+```
+
+```{r}
+x <- c(rnorm(30, mean = -3), rnorm(30, mean = 3))
+
+y <- rev(x)
+
+x <- cbind(x, y)
+head(x)
+```
+
+A wee peak at x with `plot()`
+
+```{r}
+plot(x)
+```
+
+The main function in "base" R for K-means clustering is called 'kmeans()'.
+
+```{r}
+k <- kmeans(x, centers = 2)
+k
+```
+
+> Q. How big are the clusters (i.e their size)?
+
+```{r}
+k$size
+```
+
+> Q. What clusters do my data points reside in?
+
+```{r}
+k$cluster
+```
+
+> Q. Make a plot of our data colored by cluster assignment - i.e. Make a result figure ...
+
+```{r}
+plot(x, col = k$cluster)
+points(k$centers, col = "blue", pch = 15)
+```
+
+> Q. Cluster with k-means into 4 clusters and plot your results as above.
+
+```{r}
+k4 <- kmeans(x, 4)
+plot(x, col = k4$cluster)
+points(k4$centers, col = "blue", pch = 15)
+```
+
+> Q. Run kmenas with center (i.e. values of k) equal 1 to 6
+
+```{r}
+k1 <- kmeans(x, centers = 1)$tot.withinss
+k2 <- kmeans(x, centers = 2)$tot.withinss
+k3 <- kmeans(x, centers = 3)$tot.withinss
+k4 <- kmeans(x, centers = 4)$tot.withinss
+k5 <- kmeans(x, centers = 5)$tot.withinss
+k6 <- kmeans(x, centers = 6)$tot.withinss
+
+
+ans <- c(k1, k2, k3, k4, k5, k6)
+
+```
+
+Or use a for loop
+
+```{r}
+ans <- NULL
+
+for (i in 1:6) {
+  ans <- c(ans, kmeans(x, centers = i)$tot.withinss)
+}
+
+ans
+```
+
+Make a "scree-plot"
+
+```{r}
+plot(ans, typ = "b")
+```
+
+## Heirarchical Clustering 
+
+The main function in "base" R for this is called `hclust()` 
+
+```{r}
+ d <- dist(x)
+hc <- hclust(d)
+hc
+```
+
+```{r}
+plot(hc)
+abline(h = 7, col = "red")
+```
+
+To obtain clusters from our `hclust` result object **hc** we "cut" the tree to yeild different sub branches. For this we use the `cutree()` function
+
+```{r}
+grps <- cutree(hc, h = 7)
+grps
+```
+
+```{r}
+plot(x, col = grps)
+```
+
+```{r}
+library(pheatmap)
+
+pheatmap(x)
+```
+
+
+## Principal Component Analysis (PCA)
+
+```{r}
+url <- "https://tinyurl.com/UK-foods"
+x <- read.csv(url)
+```
+
+> Q1. How many rows and columns are in your new data frame named x? What R functions could you use to answer this questions?
+
+```{r}
+dim(x)
+```
+
+There are 17 rows and 5 columns.
+
+
+```{r}
+## Preview the first 6 rows
+head(x)
+```
+
+> Q2. Which approach to solving the ‘row-names problem’ mentioned above do you prefer and why? Is one approach more robust than another under certain circumstances?
+
+```{r}
+x <- read.csv(url, row.names=1)
+head(x)
+```
+
+```{r}
+dim(x)
+```
+
+
+I prefer the `read.csv()` method to solve the row-names problem because it requires much less code. Using the `read.csv()` approach is more robust because it reads the row names correctly and there is no risk of losing other columns in the data frame.
+
+
+```{r}
+# Using base R
+barplot(as.matrix(x), beside=T, col=rainbow(nrow(x)))
+```
+
+> Q3: Changing what optional argument in the above barplot() function results in the following plot?
+
+Setting the beside arguemnt of barplot to FALSE, which is the default, results in stacked bars.
+
+```{r}
+# Using base R
+barplot(as.matrix(x), beside=F, col=rainbow(nrow(x)))
+```
+
+## Paires plote and heatmaps
+Scatterplot matricies (aka "pairs plots") 
+
+> Q5: We can use the pairs() function to generate all pairwise plots for our countries. Can you make sense of the following code and resulting figure? What does it mean if a given point lies on the diagonal for a given plot?
+
+The argument x is the data input into the function, which in this case is the complete data frame. The col argument is setting each point a different colors of the rainbow based on the number of rows in the data frame. The pch argument is changing the shape of all the points in the plot. The resulting figure is a visualization of each country compared with one another. If a point lies on the the diagonal it means the value is similar for both countries being compared in that plot.
+
+```{r}
+pairs(x, col=rainbow(nrow(x)), pch=16)
+```
+
+> Q6. Based on the pairs and heatmap figures, which countries cluster together and what does this suggest about their food consumption patterns? Can you easily tell what the main differences between N. Ireland and the other countries of the UK in terms of this data-set?
+
+```{r}
+library(pheatmap)
+
+pheatmap( as.matrix(x) )
+```
+
+England and Wales cluster together, which suggests that they have similar food consumption patterns. It is still difficult to draw conclusions with this kind of clustering method and visualization despite it being a smaller data frame. 
+
+
+## PCA to the rescue
+
+The main function in "base" R for PCA is called `prcomp()`.
+
+As we want to do PCA on the food data for the different countries, we will want the foods in the columns.
+
+```{r}
+pca <- prcomp(t(x))
+summary(pca)
+```
+
+Our result object is called `pca` and it has a `$x` component that we will look at first
+
+```{r}
+pca$x
+```
+
+> Q7. Complete the code below to generate a plot of PC1 vs PC2. The second line adds text labels over the data points.
+
+```{r}
+library(ggplot2)
+
+ggplot(pca$x) +aes(PC1, PC2, label = rownames(pca$x)) +
+  geom_point() +
+  geom_text() 
+```
+
+
+> Q8. Customize your plot so that the colors of the country names match the colors in our UK and Ireland map and table at start of this document.
+
+```{r}
+
+cols <- c("orange", "red", "blue", "darkgreen")
+ggplot(pca$x) +aes(PC1, PC2, label = rownames(pca$x)) +
+  geom_point() +
+  geom_text(col = cols) 
+  
+```
+
+Another major result out of PCA is the so-called "variable loadings" or `$rotation` that tells us how the original variables (foods) contribute to the PCs (i.e. our new axis). 
+
+```{r}
+pca$rotation
+```
+
+
+```{r}
+ggplot(pca$rotation) +
+  aes(PC1, rownames(pca$rotation)) +
+  geom_col()
+```
+
+> Q9: Generate a similar ‘loadings plot’ for PC2. What two food groups feature prominantely and what does PC2 maninly tell us about?
+
+```{r}
+ggplot(pca$rotation) +
+  aes(PC2, rownames(pca$rotation)) +
+  geom_col()
+```
+Based on the loading plot of PC2, it seems fresh potatoes and soft drinks are the most prominent. PC2 mainly tells us which groups have the second most variation independent of the first principle component. 
+
+
+
+
