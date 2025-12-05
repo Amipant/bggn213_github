@@ -1,0 +1,15 @@
+This is the nano text editor - as simple asit comes
+
+git: version control 
+pwd: print working directory (where the hell am I)
+cd: change directroy
+ls: listing 
+mkdir: to create a new directory (create a folder)
+rm: remove files (i.e. delete) 
+nano: to open text editor
+
+Absolute path: where stuff is spelled out form the root of the file systems, e.g. /c/Users/amipa/ONeDrive/Desktop/UCSD/BGGN213/class15/unix_notes.txt
+
+relative path: where stuff is relative to where you are currently (i.e. yout current working directory)
+
+useful shortcuts: "~" and " .."

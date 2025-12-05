@@ -1,0 +1,56 @@
+This is the nano text editor - as simple asit comes
+
+git:    version control 
+pwd:    print working directory (where the hell am I)
+cd:     change directroy
+ls:     listing 
+mkdir:  to create a new directory (create a folder)
+rm:     remove files (i.e. delete) 
+nano:   to open text editor
+cp:     copy a file (cp source result)
+mv:     rename or move a file (mv source result)
+less:   to see the contents of a text file
+q:      to exit from viewing a text file 
+head:   view the top lines of a file
+grep:   pattern match 
+ps:     to get the PID of all current processes
+ssh:    secure shell login
+scp:    to secure copy a file to a new location
+
+Process control
+
+^C      control-c to kill a running job
+^Z      put to sleep a running job
+fg:     to resume job in foreground
+bg:     to resume job in background
+top:    display the top running processes
+kill PID. kill a job with this PID number
+&       placing & at the end of a line sends the job to run in the background from the begining
+
+
+* wild card match everything character
+
+
+Absolute path: where stuff is spelled out form the root of the file systems, e.g. /c/Users/amipa/ONeDrive/Desktop/UCSD/BGGN213/class15/unix_notes.txt
+
+relative path: where stuff is relative to where you are currently (i.e. yout current working directory)
+
+useful shortcuts: "~" and " .."
+
+- Open an SSH client.
+
+- Locate your private key file. The key used to launch this instance is amikey.pem
+
+- Run this command, if necessary, to ensure your key is not publicly viewable.
+chmod 400 "amikey.pem"
+
+- Connect to your instance using its Public DNS:
+
+ec2-34-211-24-95.us-west-2.compute.amazonaws.com
+
+Example:
+
+ssh -i "~/Downloads/amikey.pem" ubuntu@ec2-34-211-24-95.us-west-2.compute.amazonaws.com
+
+- SCP 
+scp -i "~/Downloads/amikey.pem" ubuntu@ec2-34-211-24-95.us-west-2.compute.amazonaws.com:~/work/mm-second.x.zebrafish.tsv .
