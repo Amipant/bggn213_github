@@ -53,7 +53,7 @@ not “C” “A” “C” “G” “C”
 paste(v, collapse = "")
 ```
 
-    [1] "TGGTGAGATGTAGTATAGTGTCTTGGTAAGAGAGTGAACTACTTCGGCTT"
+    [1] "TTTTACGAAGGCATGCTCCCACCTCGCCTAACCATATTTCGGCTGAGCGG"
 
 Turn this into my first wee function
 
@@ -71,7 +71,7 @@ Test it:
 generate_dna(60)
 ```
 
-    [1] "TGCCGAATCCCGTCTGGTGGCGTTATAAAATGGATTACGTTGCTATATTTTGCGCCATAT"
+    [1] "CCCGTTCTAAGCGCTTAAAACCGGTTGCGACTCGCTCTCATTTCAAAACGTGCAGAGTGG"
 
 ``` r
 fasta <- F
@@ -122,7 +122,7 @@ generate_protein <- function(size = 50, fasta = T) {
 generate_protein(6)
 ```
 
-    [1] "LRFCSR"
+    [1] "GDKCAR"
 
 Use our new `generate_protein()` function to make random protein
 sequences of length 6 to 12 (i.e. one length 6, one length 7, etc. up to
@@ -132,43 +132,43 @@ length 12)
 generate_protein(6)
 ```
 
-    [1] "RTGKIC"
+    [1] "IFHKTS"
 
 ``` r
 generate_protein(7)
 ```
 
-    [1] "GMEICTF"
+    [1] "EEREFGD"
 
 ``` r
 generate_protein(8)
 ```
 
-    [1] "FISYSLWW"
+    [1] "YPFFWHQD"
 
 ``` r
 generate_protein(9)
 ```
 
-    [1] "MNCQQTIGE"
+    [1] "SCEYTMEIM"
 
 ``` r
 generate_protein(10)
 ```
 
-    [1] "WYFRRLDAFQ"
+    [1] "YGDACVGYQK"
 
 ``` r
 generate_protein(11)
 ```
 
-    [1] "GPTRSKSNKCC"
+    [1] "NWQKDDWCPQM"
 
 ``` r
 generate_protein(12)
 ```
 
-    [1] "GPQKLDSLLFVH"
+    [1] "GPHSWEHDSTWA"
 
 A second way is to use a `for()` loop:
 
@@ -189,19 +189,19 @@ for (i in lengths) {
 ```
 
     >6
-    RGLDCD
+    PKYYGY
     >7
-    KKECVYC
+    NLTTCDA
     >8
-    LMWGVWDM
+    VFGFVVLI
     >9
-    HKEKCTKVV
+    TWPPGRGGM
     >10
-    TYEAKSIVIL
+    RVEDFHDNCV
     >11
-    NTKQWSVPHGH
+    EDSVLPGEYKW
     >12
-    SDHKEMGPDSLI
+    WHCHNTIGHALF
 
 A third, and better way to solve this is to use the `apply()` family of
 functions, specifically the `sapply()` function in this case.
@@ -210,5 +210,5 @@ functions, specifically the `sapply()` function in this case.
 sapply(6:12, generate_protein)
 ```
 
-    [1] "WHSDFA"       "QMERQSN"      "FKRRPNLV"     "AGSPQLSNW"    "YILCGMNLTA"  
-    [6] "CFNATVECISS"  "NYNDPVEWNISD"
+    [1] "FTDTHP"       "SKPDFFA"      "FSRHAHAG"     "HTTPPPWVH"    "KLPKCQNKFQ"  
+    [6] "MPCGYGFRFKG"  "VKMFTAMTMTGW"
